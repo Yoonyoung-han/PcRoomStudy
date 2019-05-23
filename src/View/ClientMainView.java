@@ -1,5 +1,8 @@
 package View;
 
-public class ClientMainView {
+import javax.swing.JPanel;
+
+public class ClientMainView extends JPanel {
+	
 
 }
