@@ -51,11 +51,11 @@ public class PcRoomClient extends JFrame {
 		pane.addTab("식사", meal );
 		pane.addTab("음료", drink );
 		
-		pane.setSelectedIndex(0); 
+		pane.setSelectedIndex(1); 
+		
 		
 		p_center.add(pane,BorderLayout.CENTER);
 		
-		//화면 크기 지정
 
 
 		
