@@ -1,3 +1,4 @@
+package pcroommain;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -6,13 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
-import View.ClientMainView;
-import View.DrinkView;
-import View.MealView;
-import View.SnackView;
+import view.ClientMainView;
+import view.DrinkView;
+import view.MealView;
+import view.SnackView;
 
 public class PcRoomClient extends JFrame {
 	ClientMainView client;
@@ -47,15 +49,18 @@ public class PcRoomClient extends JFrame {
 		
 		JTabbedPane  pane = new JTabbedPane();
 		pane.addTab("인기 상품", client );
-		pane.addTab("스낵", snack);
-		pane.addTab("식사", meal );
-		pane.addTab("음료", drink );
+		pane.addTab("스낵", new JScrollPane(snack));
+		pane.addTab("식사",new JScrollPane( meal));
+		pane.addTab("음료", new JScrollPane(drink));
 		
 		pane.setSelectedIndex(1); 
+
 		
 		
 		p_center.add(pane,BorderLayout.CENTER);
 		
+
+
 
 
 		
@@ -94,7 +99,7 @@ public class PcRoomClient extends JFrame {
 			
 			add("Center", pane );
 			add("South",p_south);
-			setSize(800,600);
+			setSize(1320,1000);
 			setVisible( true );
 			
 
