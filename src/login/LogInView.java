@@ -93,6 +93,8 @@ public class LogInView extends JFrame {
 
         bLogIn = new JButton( "로그인하기" );
         bLogIn.setBackground( Color.blue );
+        bLogIn.setContentAreaFilled( false );
+        bLogIn.setOpaque( true );
 
         JPanel center_panel = new JPanel( );
         center_panel.add( tfId );
