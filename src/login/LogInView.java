@@ -27,6 +27,7 @@ public class LogInView extends JFrame {
 
         //이벤트
         bLogIn.addActionListener( ah );
+        ComboPcPlace.addActionListener( ah );
     }
 
     class ActionHandler implements ActionListener {
@@ -38,6 +39,8 @@ public class LogInView extends JFrame {
 
             if (o == bLogIn) {
                 loginCheck( );
+            } else if ( o == ComboPcPlace ) {
+                comboGet();
             }
         }
     }
@@ -53,6 +56,7 @@ public class LogInView extends JFrame {
 
             if (id.equals( id2 ) && passwd.equals( passwd2 )) {
                 JOptionPane.showMessageDialog( null, "로그인 성공" );
+                comboGet( );
             } else {
                 JOptionPane.showMessageDialog( null, "아이디 혹은 암호가 틀렸습니다." );
             }
@@ -73,18 +77,7 @@ public class LogInView extends JFrame {
 
     public void addLayout() {
 
-        Vector<String> list = null;
-
-        try {
-            list = db.comboPcPlace( );
-
-        } catch (Exception e) {
-            e.printStackTrace( );
-        }
-//        String[] PcPlace = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"};
-        ComboPcPlace = new JComboBox( list );
-        ComboPcPlace.setBorder( new TitledBorder( "사용 가능한 자리" ) );
-        ComboPcPlace.setBackground( Color.cyan );
+        comboGet( );
 
         tfId = new JTextField( 15 );
         tfId.setBorder( new TitledBorder( "아이디" ) );
@@ -110,6 +103,21 @@ public class LogInView extends JFrame {
         setVisible( true );
 
         setSize( 400, 500 );
+    }
+
+    private Vector<String> comboGet() {
+        Vector<String> list = null;
+
+        try {
+            list = db.comboPcPlace( );
+            ComboPcPlace = new JComboBox( list );
+            ComboPcPlace.setBorder( new TitledBorder( "사용 가능한 자리" ) );
+            ComboPcPlace.setBackground( Color.cyan );
+
+        } catch (Exception e) {
+            e.printStackTrace( );
+        }
+        return list;
     }
 
 

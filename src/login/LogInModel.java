@@ -30,7 +30,6 @@ public class LogInModel {
 
         // 전송 객체
         PreparedStatement st = con.prepareStatement( sql );
-        System.out.println( sql );
 
         // sql 결과 전송
         ResultSet rs = st.executeQuery( );
