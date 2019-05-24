@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import pcroommain.PcRoomClient;
+
 import javax.swing.*;
 
 
@@ -20,10 +23,15 @@ public class DrinkView extends JPanel {
 	String [] d_icon = {"src/imgs/갈아만든배.jpg","src/imgs/망고스무디.jpg","src/imgs/밀키스.jpg","src/imgs/봉봉.jpg","src/imgs/사이다.jpg","src/imgs/아메리카노.jpg"
 			,"src/imgs/청포도스무디.jpg","src/imgs/카라멜마끼아또.jpg","src/imgs/카페라떼.jpg","src/imgs/콜라.jpg","src/imgs/토레타.jpg","src/imgs/환타.jpg"};
 	
-	public DrinkView() {
+	PcRoomClient parent;
+	
+	public DrinkView(PcRoomClient parent) {
 		for (int i = 0; i < 12; i++) {
 			drinkname[i] = new JButton(d_label[i],new ImageIcon(d_icon[i]));
+			drinkname[i].setVerticalTextPosition(JButton.BOTTOM);
+			drinkname[i].setHorizontalTextPosition(JButton.CENTER);
 		}
+		this.parent = parent;
 		addLayout();
 		eventProc();
 	}
@@ -40,6 +48,19 @@ public class DrinkView extends JPanel {
 	}
 	
 	public void eventProc() {
+		drinkMenuHandler dm = new drinkMenuHandler();
+		for (int i = 0; i < drinkname.length; i++) {
+			drinkname[i].addActionListener(dm);
+		}
+	}
+	
+	class drinkMenuHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Object o = e.getSource();
+			
+		}
 		
 	}
 	

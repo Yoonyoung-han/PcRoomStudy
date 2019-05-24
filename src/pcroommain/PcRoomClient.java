@@ -1,6 +1,7 @@
 package pcroommain;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,7 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.AbstractTableModel;
 
 import view.ClientMainView;
 import view.DrinkView;
@@ -21,19 +24,23 @@ public class PcRoomClient extends JFrame {
 	DrinkView drink;
 	MealView meal;
 	SnackView snack;
-	JTextArea taChat, taOrderList, taOrderTotal;
+	public JTextArea taChat, taOrderTotal;
 	JButton bOrder;
 	JRadioButton rbCash, rbCard;
-	
+	public JTable tableOrderList;
+	OrderTableModel tbModelOrder;
 	
 	public PcRoomClient() {
 		//멤버변수 객체생성
 		taChat = new JTextArea("채팅",15,30);
-		taOrderList = new JTextArea("주문 리스트",10,25);
+//		taOrderList = new JTextArea("주문 리스트",10,25);
 		taOrderTotal = new JTextArea("Total",5,10);
 		bOrder = new JButton("주문 하기");
 		rbCash = new JRadioButton();
 		rbCard = new JRadioButton();
+		tbModelOrder = new OrderTableModel();
+		tableOrderList = new JTable(tbModelOrder);
+		
 		
 // 탭이랑 나머지 잡다한 거 크게 하나 붙이기
 		
@@ -43,9 +50,9 @@ public class PcRoomClient extends JFrame {
 	
 		//각각의 화면을 관리하는 클래스 객체 생성
 		client = new ClientMainView();
-		drink = new DrinkView();
-		meal = new MealView();
-		snack = new SnackView();
+		drink = new DrinkView(this);
+		meal = new MealView(this);
+		snack = new SnackView(this);
 		
 		JTabbedPane  pane = new JTabbedPane();
 		pane.addTab("인기 상품", client );
@@ -74,7 +81,7 @@ public class PcRoomClient extends JFrame {
 			
 			JPanel p_south_center = new JPanel();
 			p_south_center.setLayout(new BorderLayout());
-			p_south_center.add(taOrderList,BorderLayout.CENTER);
+			p_south_center.add(new JScrollPane(tableOrderList),BorderLayout.CENTER);
 			p_south_center.add(taOrderTotal,BorderLayout.SOUTH);
 		
 			
@@ -107,9 +114,42 @@ public class PcRoomClient extends JFrame {
 
 	}
 	
+	class OrderTableModel extends AbstractTableModel{
+		ArrayList data = new ArrayList();
+		String [] columnNames = {"상품 번호","상품 명","수량","금액","빈칸"};
+		
+		
+		   public int getColumnCount() { 
+		        return columnNames.length; 
+		    } 
+		     
+		    public int getRowCount() { 
+		        return data.size(); 
+		    } 
+
+		    public Object getValueAt(int row, int col) { 
+				ArrayList temp = (ArrayList)data.get( row );
+		        return temp.get( col ); 
+		    }
+		    
+		    public String getColumnName(int col){
+		    	return columnNames[col];
+		    }
+	}
+	
+	public void addOrderData(ArrayList data) {
+		
+		
+		
+		tbModelOrder.data.add(data);
+		tbModelOrder.fireTableDataChanged();
+		System.out.println(tbModelOrder.data.size());
+	}
+	
 	public static void main(String[] args) {
 		new PcRoomClient();
 
 	}
+
 
 }
