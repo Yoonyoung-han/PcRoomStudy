@@ -5,7 +5,6 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class LogInView extends JFrame {
@@ -16,10 +15,9 @@ public class LogInView extends JFrame {
     LogInModel db;
 
     public LogInView() {
-        connectDB( );
-        addLayout( );    //화면
-        eventProc( );    // 디비연결
-
+        connectDB( );   // 디비 연결
+        addLayout( );   // 화면 연결
+        eventProc( );   // 이벤트 연결
     }
 
     private void eventProc() {
@@ -30,7 +28,7 @@ public class LogInView extends JFrame {
         ComboPcPlace.addActionListener( ah );
     }
 
-    class ActionHandler implements ActionListener {
+    public class ActionHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -99,9 +97,8 @@ public class LogInView extends JFrame {
         add( tfPass );
         add( bLogIn );
 
-
+        setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         setVisible( true );
-
         setSize( 400, 500 );
     }
 
@@ -112,7 +109,7 @@ public class LogInView extends JFrame {
             list = db.comboPcPlace( );
             ComboPcPlace = new JComboBox( list );
             ComboPcPlace.setBorder( new TitledBorder( "사용 가능한 자리" ) );
-            ComboPcPlace.setBackground( Color.cyan );
+            ComboPcPlace.setBackground( Color.yellow );
 
         } catch (Exception e) {
             e.printStackTrace( );
