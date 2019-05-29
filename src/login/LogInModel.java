@@ -1,8 +1,5 @@
 package login;
 
-import oracle.jdbc.proxy.annotation.Pre;
-
-import javax.swing.*;
 import java.sql.*;
 import java.util.Vector;
 
@@ -56,10 +53,24 @@ public class LogInModel {
         ResultSet rs = st.executeQuery( );
 
         String[] valid = new String[2];
-        if(rs.next()) {
+        if (rs.next( )) {
             valid[0] = rs.getString( "MEMBER_ID" );
             valid[1] = rs.getString( "MEMBER_PASS" );
         }
         return valid;
+    }
+
+    public void updateCombo(String pcId) throws Exception {
+        con = DriverManager.getConnection( url, user, pass );
+
+        String sql = "UPDATE COMPUTER SET PC_STATUS = 1 WHERE PC_PLACE = ?";
+
+        System.out.println( sql );
+
+        PreparedStatement st = con.prepareStatement( sql );
+        st.setString( 1, pcId );
+
+        int result = st.executeUpdate();
+        System.out.println( result + "updated" );
     }
 }
