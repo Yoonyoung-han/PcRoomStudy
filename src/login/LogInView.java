@@ -102,16 +102,16 @@ public class LogInView extends JFrame {
 
         private void loginCheck() {
             String id = tfId.getText( );
-            String passwd = tfPass.getText( );
+            String pass = tfPass.getText( );
 
             try {
-                String[] valid = db.loginCheck( id, passwd );
+                String[] valid = db.loginCheck( id, pass );
                 String id2 = valid[0];
-                String passwd2 = valid[1];
+                String pass2 = valid[1];
 
-                System.out.println( id2 + "//" + passwd2 ); // 넘어온 값 확인용
+                System.out.println( id2 + "//" + pass2 ); // 넘어온 값 확인용
 
-                if (id.equals( id2 ) && passwd.equals( passwd2 )) {
+                if (id.equals( id2 ) && pass.equals( pass2 )) {
 //                JOptionPane.showMessageDialog( null, "로그인 성공" );
                     clientStart( );
                     updateCombo();
